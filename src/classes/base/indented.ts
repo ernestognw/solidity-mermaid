@@ -1,6 +1,6 @@
-import { ErrorType, FormatError } from "@classes/errors/format-error";
+import { ErrorType, FormatError } from "@classes/errors/format";
 
-export class Indented {
+export default class Indented {
   constructor(private _indentation = 0) {}
 
   protected get indentation() {

@@ -5,7 +5,7 @@ import ERC20Ouput from "./ERC20Output.json";
 const classDiagram = new Class(
   ERC20Ouput as SolcOutput,
   "ContractDefinition",
-  3501
+  1930
 );
 
 classDiagram.print();
