@@ -124,8 +124,6 @@ export default class Processor implements ASTProcessor {
     }
 
     this.processSubNodes(node.nodes);
-    console.log(node.nodes);
-    console.log(node.baseContracts);
 
     // | EnumDefinition
     // | ErrorDefinition
@@ -201,7 +199,7 @@ export default class Processor implements ASTProcessor {
 
     const visibility = visibilityMap[node.visibility];
 
-    const name = node.name ?? node.kind;
+    const name = node.name || node.kind;
 
     const processParameters = (parameters: VariableDeclaration[]): string =>
       parameters

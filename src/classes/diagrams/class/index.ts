@@ -1,5 +1,5 @@
 import Mermaid from "@classes/base/mermaid";
-import { Node, NodeType, NodeTypeMap } from "solidity-ast/node";
+import { Node, NodeType } from "solidity-ast/node";
 import { SolcOutput } from "solidity-ast/solc";
 import { astDereferencer } from "solidity-ast/utils";
 import Processor from "./processor";
@@ -38,15 +38,5 @@ export class Class extends Mermaid {
 
   private _process(node: Node) {
     this.processor[`process${node.nodeType}`](node as any); // TODO: Fix
-
-    // if ("nodes" in node)
-    //   for (const subnode of node.nodes) {
-    //     this._process(subnode);
-    //   }
-
-    if ("baseContracts" in node)
-      for (const baseContracts of node.baseContracts) {
-        this._process(baseContracts);
-      }
   }
 }
