@@ -86,17 +86,6 @@ export default class Processor implements ASTProcessor {
 
     this.processSubNodes(node.nodes, { parent: node });
 
-    // Possible interest list:
-    // | EnumDefinition
-    // | ErrorDefinition
-    // | EventDefinition
-    // | FunctionDefinition
-    // | ModifierDefinition
-    // | StructDefinition
-    // | UserDefinedValueTypeDefinition
-    // | UsingForDirective
-    // | VariableDeclaration
-
     this.context.unindent();
     this.context.push("}");
     this.context.push("");
