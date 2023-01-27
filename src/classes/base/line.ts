@@ -3,6 +3,7 @@ import Indented from "./indented";
 
 export default class Line extends Indented {
   private readonly _regex = /^.*$/g;
+  private readonly _spaces = "  ";
 
   constructor(private _text: string = "", indentation = 0) {
     super(indentation);
@@ -11,12 +12,11 @@ export default class Line extends Indented {
 
   private set text(text: string) {
     this._text = text;
-
     this._validate();
   }
 
   get text() {
-    return `${`  `.repeat(this.indentation)}${this._text}`;
+    return `${this._spaces.repeat(this.indentation)}${this._text}`;
   }
 
   concat(text: string) {
