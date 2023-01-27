@@ -32,37 +32,38 @@ export default class Processor implements ASTProcessor {
     });
   }
 
-  processSourceUnit() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // See: https://github.com/ernestognw/solidity-mermaid/issues/16
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processSourceUnit() {}
 
-  processArrayTypeName() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/11
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processArrayTypeName() {}
 
-  processAssignment() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processAssignment() {}
 
-  processBinaryOperation() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processBinaryOperation() {}
 
-  processBlock() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processBlock() {}
 
-  processBreak() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processBreak() {}
 
-  processConditional() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processConditional() {}
 
-  processContinue() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processContinue() {}
 
   processContractDefinition(node: ContractDefinition) {
     if (node.documentation)
@@ -103,53 +104,53 @@ export default class Processor implements ASTProcessor {
     this.processSubNodes(node.baseContracts, { parent: node });
   }
 
-  processDoWhileStatement() {
-    // No plans for this
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processDoWhileStatement() {}
 
-  processElementaryTypeName() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/11
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processElementaryTypeName() {}
 
-  processElementaryTypeNameExpression() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/11
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processElementaryTypeNameExpression() {}
 
-  processEmitStatement() {
-    // No plans for this
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processEmitStatement() {}
 
-  processEnumDefinition() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/15
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processEnumDefinition() {}
 
-  processEnumValue() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/15
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processEnumValue() {}
 
-  processErrorDefinition() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/14
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processErrorDefinition() {}
 
-  processEventDefinition() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/13
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processEventDefinition() {}
 
-  processExpressionStatement() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processExpressionStatement() {}
 
-  processForStatement() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processForStatement() {}
 
-  processFunctionCall() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processFunctionCall() {}
 
-  processFunctionCallOptions() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processFunctionCallOptions() {}
 
   processFunctionDefinition(node: FunctionDefinition) {
     const visibilityMap: Record<Visibility, string> = {
@@ -163,6 +164,8 @@ export default class Processor implements ASTProcessor {
 
     const name = node.name || node.kind;
 
+    // Should we handle this in `procesParameterList`?
+    // See  https://github.com/ernestognw/solidity-mermaid/issues/7
     const processParameters = (parameters: VariableDeclaration[]): string =>
       parameters
         .map((parameter) => {
@@ -193,42 +196,46 @@ export default class Processor implements ASTProcessor {
     this.context.push(line.text);
   }
 
-  processFunctionTypeName() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/11
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processFunctionTypeName() {}
 
-  processIdentifier() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processIdentifier() {}
 
-  processIdentifierPath() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processIdentifierPath() {}
 
-  processIfStatement() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processIfStatement() {}
 
-  processImportDirective() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // See: https://github.com/ernestognw/solidity-mermaid/issues/12
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processImportDirective() {}
 
-  processIndexAccess() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processIndexAccess() {}
 
-  processIndexRangeAccess() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processIndexRangeAccess() {}
 
   processInheritanceSpecifier(
     node: InheritanceSpecifier,
     options: ProcessOptions
   ) {
     const inheritFrom = this.dereferencer(
-      "ContractDefinition", // TODO: Verify what happens for ContractDefinition
+      // Verify other cases for
+      // TODO: https://github.com/ernestognw/solidity-mermaid/issues/4
+      "ContractDefinition",
       node.baseName.referencedDeclaration
     );
+
     if (!isNodeType("ContractDefinition", options.parent))
       throw new ASTError(
         "Parent of InheritanceSpecifier can only be ContractDefinition",
@@ -240,110 +247,113 @@ export default class Processor implements ASTProcessor {
     this.processSubNodes([inheritFrom], { parent: node });
   }
 
-  processInlineAssembly() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processInlineAssembly() {}
 
-  processLiteral() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processLiteral() {}
 
-  processMapping() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/11
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processMapping() {}
 
-  processMemberAccess() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processMemberAccess() {}
 
-  processModifierDefinition() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processModifierDefinition() {}
 
-  processModifierInvocation() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processModifierInvocation() {}
 
-  processNewExpression() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/10
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processNewExpression() {}
 
-  processOverrideSpecifier() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/9
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processOverrideSpecifier() {}
 
-  processParameterList() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/7
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processParameterList() {}
 
-  processPlaceholderStatement() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processPlaceholderStatement() {}
 
-  processPragmaDirective() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // See: https://github.com/ernestognw/solidity-mermaid/issues/6
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processPragmaDirective() {}
 
-  processReturn() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processReturn() {}
 
-  processRevertStatement() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processRevertStatement() {}
 
-  processStructDefinition() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/8
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processStructDefinition() {}
 
+  // Explicitly skipped.
+  // See: https://github.com/ernestognw/solidity-mermaid/issues/5
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   processStructuredDocumentation() {
-    // Not used at the moment but might be useful with notes
     // See https://mermaid.js.org/syntax/classDiagram.html#notes
   }
 
-  processTryCatchClause() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processTryCatchClause() {}
 
-  processTryStatement() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processTryStatement() {}
 
-  processTupleExpression() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processTupleExpression() {}
 
-  processUnaryOperation() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processUnaryOperation() {}
 
-  processUncheckedBlock() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processUncheckedBlock() {}
 
-  processUserDefinedTypeName() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/4
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processUserDefinedTypeName() {}
 
-  processUserDefinedValueTypeDefinition() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/4
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processUserDefinedValueTypeDefinition() {}
 
-  processUsingForDirective() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/3
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processUsingForDirective() {}
 
-  processVariableDeclaration() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/2
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processVariableDeclaration() {}
 
-  processVariableDeclarationStatement() {
-    // TODO: Complete
-  }
+  // TODO: https://github.com/ernestognw/solidity-mermaid/issues/2
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processVariableDeclarationStatement() {}
 
-  processWhileStatement() {
-    // TODO: Complete
-  }
+  // Explicitly skipped.
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  processWhileStatement() {}
 
   private processSubNodes(nodes: Node[], options: ProcessOptions) {
     for (const subnode of nodes) {
@@ -353,6 +363,7 @@ export default class Processor implements ASTProcessor {
 
   private processNode(node: Node, options: ProcessOptions) {
     // Couldn't find a way to successfully execute this. Failed.
+    // TODO: https://github.com/ernestognw/solidity-mermaid/issues/1
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this[`process${node.nodeType}`](node as any, options);
   }
