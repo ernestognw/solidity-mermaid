@@ -37,6 +37,6 @@ export class Class extends Mermaid {
   }
 
   private _process(node: Node) {
-    this.processor[`process${node.nodeType}`](node as any); // TODO: Fix
+    this.processor.process(node);
   }
 }

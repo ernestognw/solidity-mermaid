@@ -4,14 +4,30 @@ import Indented from "./indented";
 export default class Line extends Indented {
   private readonly _regex = /^.*$/g;
 
-  constructor(private readonly _text: string, indentation: number) {
+  constructor(private _text: string = "", indentation = 0) {
     super(indentation);
-    if (!this._regex.test(this.text)) {
-      throw new FormatError("Line can't contain newline", ErrorType.BadLine);
-    }
+    this._validate();
+  }
+
+  private set text(text: string) {
+    this._text = text;
+
+    this._validate();
   }
 
   get text() {
     return `${`  `.repeat(this.indentation)}${this._text}`;
+  }
+
+  concat(text: string) {
+    // Intentionally muting the variable
+    this.text = this._text.concat(text);
+
+    return this;
+  }
+
+  private _validate() {
+    if (!this.text.match(this._regex))
+      throw new FormatError("Line can't contain newline", ErrorType.BadLine);
   }
 }

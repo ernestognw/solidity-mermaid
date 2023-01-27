@@ -1,4 +1,3 @@
-import { ErrorType, FormatError } from "@classes/errors/format";
 import Indented from "./indented";
 import Line from "./line";
 

@@ -1,66 +1,16 @@
 import {
-  ArrayTypeName,
-  Assignment,
-  BinaryOperation,
-  Block,
-  Break,
-  Conditional,
-  Continue,
   ContractDefinition,
-  DoWhileStatement,
-  ElementaryTypeName,
-  ElementaryTypeNameExpression,
-  EmitStatement,
-  EnumDefinition,
-  EnumValue,
-  ErrorDefinition,
-  EventDefinition,
-  ExpressionStatement,
-  ForStatement,
-  FunctionCall,
-  FunctionCallOptions,
   FunctionDefinition,
-  FunctionTypeName,
-  Identifier,
-  IdentifierPath,
-  IfStatement,
-  ImportDirective,
-  IndexAccess,
-  IndexRangeAccess,
   InheritanceSpecifier,
-  InlineAssembly,
-  Literal,
-  Mapping,
-  MemberAccess,
-  ModifierDefinition,
-  ModifierInvocation,
-  NewExpression,
-  OverrideSpecifier,
-  ParameterList,
-  PlaceholderStatement,
-  PragmaDirective,
-  Return,
-  RevertStatement,
-  SourceUnit,
-  StructDefinition,
-  StructuredDocumentation,
-  TryCatchClause,
-  TryStatement,
-  TupleExpression,
-  UnaryOperation,
-  UncheckedBlock,
-  UserDefinedTypeName,
-  UserDefinedValueTypeDefinition,
-  UsingForDirective,
   VariableDeclaration,
-  VariableDeclarationStatement,
   Visibility,
-  WhileStatement,
 } from "solidity-ast";
-import { ASTProcessor } from "../types";
+import { ASTProcessor, ProcessOptions } from "@classes/diagrams/types";
 import { Class } from ".";
-import { ASTDereferencer } from "solidity-ast/utils";
+import { ASTDereferencer, isNodeType } from "solidity-ast/utils";
 import { Node } from "solidity-ast/node";
+import { ASTError, ErrorType } from "@classes/errors/ast";
+import Line from "@classes/base/line";
 
 export default class Processor implements ASTProcessor {
   constructor(
@@ -76,39 +26,49 @@ export default class Processor implements ASTProcessor {
     return this._context;
   }
 
-  processSourceUnit(node: SourceUnit) {
+  process(node: Node) {
+    this.processNode(node, {
+      parent: {} as Node, // No parent
+    });
+  }
+
+  processSourceUnit() {
     // TODO: Complete
   }
 
-  processArrayTypeName(node: ArrayTypeName) {
+  processArrayTypeName() {
     // TODO: Complete
   }
 
-  processAssignment(node: Assignment) {
+  processAssignment() {
     // TODO: Complete
   }
 
-  processBinaryOperation(node: BinaryOperation) {
+  processBinaryOperation() {
     // TODO: Complete
   }
 
-  processBlock(node: Block) {
+  processBlock() {
     // TODO: Complete
   }
 
-  processBreak(node: Break) {
+  processBreak() {
     // TODO: Complete
   }
 
-  processConditional(node: Conditional) {
+  processConditional() {
     // TODO: Complete
   }
 
-  processContinue(node: Continue) {
+  processContinue() {
     // TODO: Complete
   }
 
   processContractDefinition(node: ContractDefinition) {
+    if (node.documentation)
+      this.processSubNodes([node.documentation], { parent: node });
+
+    this.comment(`${node.src}`);
     this.context.push(`class ${node.name} {`);
     this.context.indent();
 
@@ -123,8 +83,9 @@ export default class Processor implements ASTProcessor {
         this.context.push("<<Library>>");
     }
 
-    this.processSubNodes(node.nodes);
+    this.processSubNodes(node.nodes, { parent: node });
 
+    // Possible interest list:
     // | EnumDefinition
     // | ErrorDefinition
     // | EventDefinition
@@ -137,55 +98,56 @@ export default class Processor implements ASTProcessor {
 
     this.context.unindent();
     this.context.push("}");
+    this.context.push("");
 
-    this.processSubNodes(node.baseContracts);
+    this.processSubNodes(node.baseContracts, { parent: node });
   }
 
-  processDoWhileStatement(node: DoWhileStatement) {
+  processDoWhileStatement() {
+    // No plans for this
+  }
+
+  processElementaryTypeName() {
     // TODO: Complete
   }
 
-  processElementaryTypeName(node: ElementaryTypeName) {
+  processElementaryTypeNameExpression() {
     // TODO: Complete
   }
 
-  processElementaryTypeNameExpression(node: ElementaryTypeNameExpression) {
+  processEmitStatement() {
+    // No plans for this
+  }
+
+  processEnumDefinition() {
     // TODO: Complete
   }
 
-  processEmitStatement(node: EmitStatement) {
+  processEnumValue() {
     // TODO: Complete
   }
 
-  processEnumDefinition(node: EnumDefinition) {
+  processErrorDefinition() {
     // TODO: Complete
   }
 
-  processEnumValue(node: EnumValue) {
+  processEventDefinition() {
     // TODO: Complete
   }
 
-  processErrorDefinition(node: ErrorDefinition) {
+  processExpressionStatement() {
     // TODO: Complete
   }
 
-  processEventDefinition(node: EventDefinition) {
+  processForStatement() {
     // TODO: Complete
   }
 
-  processExpressionStatement(node: ExpressionStatement) {
+  processFunctionCall() {
     // TODO: Complete
   }
 
-  processForStatement(node: ForStatement) {
-    // TODO: Complete
-  }
-
-  processFunctionCall(node: FunctionCall) {
-    // TODO: Complete
-  }
-
-  processFunctionCallOptions(node: FunctionCallOptions) {
+  processFunctionCallOptions() {
     // TODO: Complete
   }
 
@@ -204,14 +166,17 @@ export default class Processor implements ASTProcessor {
     const processParameters = (parameters: VariableDeclaration[]): string =>
       parameters
         .map((parameter) => {
-          const type = parameter.typeDescriptions.typeString;
-          const storageLocation =
-            parameter.storageLocation == "default"
-              ? ""
-              : parameter.storageLocation;
-          const name = parameter.name;
+          const line = new Line();
 
-          return [type, storageLocation, name].join(" ").replace(/  /g, " ");
+          const type = parameter.typeDescriptions.typeString;
+          if (type) line.concat(type).concat(" ");
+
+          if (parameter.storageLocation != "default")
+            line.concat(parameter.storageLocation).concat(" ");
+
+          line.concat(parameter.name).concat(" ");
+
+          return line.text.trim();
         })
         .join(", ");
 
@@ -220,151 +185,179 @@ export default class Processor implements ASTProcessor {
       node.returnParameters.parameters
     );
 
-    const line = `${visibility}${name}(${parameters})`;
+    const line = new Line(`${visibility}${name}(${parameters})`);
+
     if (returnParameters) line.concat(`: (${returnParameters})`);
+    if (!node.implemented) line.concat(`$`); // For representing virtual
 
-    this.context.push(line);
+    this.context.push(line.text);
   }
 
-  processFunctionTypeName(node: FunctionTypeName) {
+  processFunctionTypeName() {
     // TODO: Complete
   }
 
-  processIdentifier(node: Identifier) {
+  processIdentifier() {
     // TODO: Complete
   }
 
-  processIdentifierPath(node: IdentifierPath) {
+  processIdentifierPath() {
     // TODO: Complete
   }
 
-  processIfStatement(node: IfStatement) {
+  processIfStatement() {
     // TODO: Complete
   }
 
-  processImportDirective(node: ImportDirective) {
+  processImportDirective() {
     // TODO: Complete
   }
 
-  processIndexAccess(node: IndexAccess) {
+  processIndexAccess() {
     // TODO: Complete
   }
 
-  processIndexRangeAccess(node: IndexRangeAccess) {
+  processIndexRangeAccess() {
     // TODO: Complete
   }
 
-  processInheritanceSpecifier(node: InheritanceSpecifier) {
+  processInheritanceSpecifier(
+    node: InheritanceSpecifier,
+    options: ProcessOptions
+  ) {
+    const inheritFrom = this.dereferencer(
+      "ContractDefinition", // TODO: Verify what happens for ContractDefinition
+      node.baseName.referencedDeclaration
+    );
+    if (!isNodeType("ContractDefinition", options.parent))
+      throw new ASTError(
+        "Parent of InheritanceSpecifier can only be ContractDefinition",
+        ErrorType.BadParent
+      );
+
+    this.context.push(`${options.parent.name} --|> ${inheritFrom.name}`);
+    this.context.push("");
+    this.processSubNodes([inheritFrom], { parent: node });
+  }
+
+  processInlineAssembly() {
     // TODO: Complete
   }
 
-  processInlineAssembly(node: InlineAssembly) {
+  processLiteral() {
     // TODO: Complete
   }
 
-  processLiteral(node: Literal) {
+  processMapping() {
     // TODO: Complete
   }
 
-  processMapping(node: Mapping) {
+  processMemberAccess() {
     // TODO: Complete
   }
 
-  processMemberAccess(node: MemberAccess) {
+  processModifierDefinition() {
     // TODO: Complete
   }
 
-  processModifierDefinition(node: ModifierDefinition) {
+  processModifierInvocation() {
     // TODO: Complete
   }
 
-  processModifierInvocation(node: ModifierInvocation) {
+  processNewExpression() {
     // TODO: Complete
   }
 
-  processNewExpression(node: NewExpression) {
+  processOverrideSpecifier() {
     // TODO: Complete
   }
 
-  processOverrideSpecifier(node: OverrideSpecifier) {
+  processParameterList() {
     // TODO: Complete
   }
 
-  processParameterList(node: ParameterList) {
+  processPlaceholderStatement() {
     // TODO: Complete
   }
 
-  processPlaceholderStatement(node: PlaceholderStatement) {
+  processPragmaDirective() {
     // TODO: Complete
   }
 
-  processPragmaDirective(node: PragmaDirective) {
+  processReturn() {
     // TODO: Complete
   }
 
-  processReturn(node: Return) {
+  processRevertStatement() {
     // TODO: Complete
   }
 
-  processRevertStatement(node: RevertStatement) {
+  processStructDefinition() {
     // TODO: Complete
   }
 
-  processStructDefinition(node: StructDefinition) {
+  processStructuredDocumentation() {
+    // Not used at the moment but might be useful with notes
+    // See https://mermaid.js.org/syntax/classDiagram.html#notes
+  }
+
+  processTryCatchClause() {
     // TODO: Complete
   }
 
-  processStructuredDocumentation(node: StructuredDocumentation) {
+  processTryStatement() {
     // TODO: Complete
   }
 
-  processTryCatchClause(node: TryCatchClause) {
+  processTupleExpression() {
     // TODO: Complete
   }
 
-  processTryStatement(node: TryStatement) {
+  processUnaryOperation() {
     // TODO: Complete
   }
 
-  processTupleExpression(node: TupleExpression) {
+  processUncheckedBlock() {
     // TODO: Complete
   }
 
-  processUnaryOperation(node: UnaryOperation) {
+  processUserDefinedTypeName() {
     // TODO: Complete
   }
 
-  processUncheckedBlock(node: UncheckedBlock) {
+  processUserDefinedValueTypeDefinition() {
     // TODO: Complete
   }
 
-  processUserDefinedTypeName(node: UserDefinedTypeName) {
+  processUsingForDirective() {
     // TODO: Complete
   }
 
-  processUserDefinedValueTypeDefinition(node: UserDefinedValueTypeDefinition) {
+  processVariableDeclaration() {
     // TODO: Complete
   }
 
-  processUsingForDirective(node: UsingForDirective) {
+  processVariableDeclarationStatement() {
     // TODO: Complete
   }
 
-  processVariableDeclaration(node: VariableDeclaration) {
+  processWhileStatement() {
     // TODO: Complete
   }
 
-  processVariableDeclarationStatement(node: VariableDeclarationStatement) {
-    // TODO: Complete
-  }
-
-  processWhileStatement(node: WhileStatement) {
-    // TODO: Complete
-  }
-
-  private processSubNodes(nodes: Node[]) {
+  private processSubNodes(nodes: Node[], options: ProcessOptions) {
     for (const subnode of nodes) {
-      this[`process${subnode.nodeType}`](subnode as any); // TODO: Fix
+      this.processNode(subnode, options);
     }
+  }
+
+  private processNode(node: Node, options: ProcessOptions) {
+    // Couldn't find a way to successfully execute this. Failed.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this[`process${node.nodeType}`](node as any, options);
+  }
+
+  private comment(message: string) {
+    this.context.push(`%% ${message}`);
   }
 }

@@ -1,11 +1,10 @@
 import { TypedError } from "./typed";
 
 export enum ErrorType {
-  Bad = "Bad",
-  BadLine = "BadLine",
+  BadParent = "BadParent",
 }
 
-export class FormatError extends TypedError<ErrorType> {
+export class ASTError extends TypedError<ErrorType> {
   constructor(message: string, type: ErrorType) {
     super(message, type);
   }
