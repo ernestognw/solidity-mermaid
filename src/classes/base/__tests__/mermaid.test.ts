@@ -34,27 +34,34 @@ describe("Mermaid", () => {
 
   describe("indentAll", () => {
     beforeEach(() => {
-      mermaid.indentAll();
-    });
-
-    function checkAllIndentations(mermaid: Mermaid, expected: number) {
       mermaid["_lines"].forEach((line) =>
-        expect(line["_indentation"]).to.equal(expected)
+        expect(line["_indentation"]).to.equal(0)
       );
-    }
+    });
 
     it("Indents all of the lines", () => {
       let current = mermaid["_indentation"];
-      checkAllIndentations(mermaid, current);
       mermaid.indentAll();
-      checkAllIndentations(mermaid, ++current);
+      mermaid["_lines"].forEach((line) =>
+        expect(line["_indentation"]).to.equal(++current)
+      );
     });
 
     it("Unindents all of the lines", () => {
       let current = mermaid["_indentation"];
-      checkAllIndentations(mermaid, current);
-      mermaid.indentAll();
-      checkAllIndentations(mermaid, --current);
+      mermaid.unindentAll();
+      mermaid["_lines"].forEach((line) =>
+        expect(line["_indentation"]).to.equal(--current)
+      );
+    });
+  });
+
+  describe("text", () => {
+    pushes.forEach((lines) => {
+      it(`Print ${lines} lines added`, () => {
+        push(mermaid, lines);
+        expect(mermaid.text.split("\n").length).to.equal(lines);
+      });
     });
   });
 });

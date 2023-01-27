@@ -15,6 +15,8 @@ export class TypedError<T> extends Error {
   }
 
   print() {
-    console.error(`${this.name} [${this.type}]: ${this.message}`);
+    const error = `${this.name} [${this.type}]: ${this.message}`;
+    console.error(error);
+    return error;
   }
 }

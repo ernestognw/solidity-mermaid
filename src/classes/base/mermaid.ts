@@ -9,7 +9,7 @@ export default class Mermaid extends Indented {
   }
 
   get text() {
-    return this.lines.toString();
+    return this.lines.join("\n");
   }
 
   public push(text: string) {
