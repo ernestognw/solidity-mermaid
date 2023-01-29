@@ -36,7 +36,7 @@ contract GLDToken is ERC20 {
 
 It will output the following representation:
 
-```
+```mermaid
 classDiagram
   %% 216:471:12
   class GameItem {
