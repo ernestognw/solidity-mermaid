@@ -32,6 +32,11 @@ export default class Class extends Mermaid {
     return this._processor;
   }
 
+  get text() {
+    this._process(this.node);
+    return super.text;
+  }
+
   unindentAll() {
     super.unindentAll();
   }
@@ -45,8 +50,7 @@ export default class Class extends Mermaid {
   }
 
   print() {
-    this._process(this._node);
-    console.log(this.lines.map((line) => line.text).join("\n"));
+    console.log(this.text);
   }
 
   private _process(node: Node) {

@@ -85,7 +85,7 @@ export function shouldBehaveLikeMermaid({
       pushes.forEach((lines) => {
         it(`Print ${lines} lines added`, function () {
           push(this.mermaid, lines);
-          expect(this.mermaid.text.split("\n").length).to.equal(
+          expect(this.mermaid.lines.length).to.equal(
             initialLines + lines
           );
         });
