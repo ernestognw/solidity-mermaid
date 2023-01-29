@@ -354,7 +354,10 @@ export default class Processor implements ASTProcessor {
     // Couldn't find a way to successfully execute this. Failed.
     // TODO: https://github.com/ernestognw/solidity-mermaid/issues/1
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this[`process${node.nodeType}`](node as any, options);
+    this[`process${node.nodeType}`](
+      node as never, // Cound't find a way to use template literals as type discriminators to avoid `never` intersection
+      options
+    );
   }
 
   private comment(message: string) {
