@@ -1,7 +1,7 @@
 import Indented from "../indented";
 import { shouldBehaveLikeIndented } from "./utils/indented.behavior";
 
-function build(indentation: number) {
+function build(indentation?: number) {
   return new Indented(indentation);
 }
 

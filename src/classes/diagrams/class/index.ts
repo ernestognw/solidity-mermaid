@@ -22,6 +22,7 @@ export default class Class extends Mermaid {
 
     super.push("classDiagram");
     this.indent();
+    this._setInitialState();
   }
 
   get node() {
@@ -33,8 +34,12 @@ export default class Class extends Mermaid {
   }
 
   get text() {
-    this._process(this.node);
     return super.text;
+  }
+
+  get processed() {
+    this._process(this.node);
+    return this.text;
   }
 
   unindentAll() {
@@ -54,6 +59,16 @@ export default class Class extends Mermaid {
   }
 
   private _process(node: Node) {
+    this._reset();
     this.processor.process(node);
+  }
+
+  protected _reset() {
+    super._reset();
+  }
+
+  private _setInitialState() {
+    this.initialIndentation = this.indentation;
+    this.initialLines = this.lines;
   }
 }

@@ -1,4 +1,4 @@
-export class TypedError<T> extends Error {
+export class TypedError<T extends string | number> extends Error {
   private readonly _name: string;
 
   constructor(message: string, private readonly _type: T) {

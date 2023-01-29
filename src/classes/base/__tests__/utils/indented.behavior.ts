@@ -3,7 +3,7 @@ import { expect } from "chai";
 
 export interface BehaveLikeIntendedParams {
   initialIndentation: number;
-  build: (indentation: number) => Indented;
+  build: (indentation?: number) => Indented;
 }
 
 export function shouldBehaveLikeIndented({
@@ -26,6 +26,11 @@ export function shouldBehaveLikeIndented({
     const indentations = new Array(5).fill("").map((_, index) => 2 ** index);
 
     describe("#constructor", function () {
+      it(`has ${initialIndentation} indentation by default`, () => {
+        const customIndented = build();
+        expect(customIndented["indentation"]).to.equal(initialIndentation);
+      });
+
       indentations.forEach((indentation) => {
         it(`sets ${indentation} initial indentation`, function () {
           const customIndented = build(indentation);
@@ -64,6 +69,16 @@ export function shouldBehaveLikeIndented({
         this.indented["_indentation"] = 0;
         this.indented.unindent();
         expect(this.indented["_indentation"]).to.equal(0);
+      });
+    });
+
+    describe("-_reset", function () {
+      it("should go back to initial state", function () {
+        call(this.indented, "indent", 10);
+        const expected = 4;
+        this.indented.initialIndentation = expected;
+        this.indented["_reset"]();
+        expect(this.indented["_indentation"]).to.equal(expected);
       });
     });
   });

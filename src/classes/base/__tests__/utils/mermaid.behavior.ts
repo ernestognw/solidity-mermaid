@@ -1,3 +1,4 @@
+import Line from "@classes/base/line";
 import Mermaid from "@classes/base/mermaid";
 import { expect } from "chai";
 import {
@@ -5,15 +6,10 @@ import {
   shouldBehaveLikeIndented,
 } from "./indented.behavior";
 
-interface BehaveLikeMermaidParams extends BehaveLikeIntendedParams {
-  initialLines: number;
-}
-
 export function shouldBehaveLikeMermaid({
-  initialLines = 0,
   initialIndentation = 0,
   build,
-}: BehaveLikeMermaidParams) {
+}: BehaveLikeIntendedParams) {
   describe(`extends ${Mermaid.name}`, () => {
     beforeEach(function () {
       this.mermaid = build(0);
@@ -33,6 +29,7 @@ export function shouldBehaveLikeMermaid({
     describe("#constructor", function () {
       pushes.forEach((lines) => {
         it(`Adds ${lines} new lines`, function () {
+          const initialLines = this.mermaid.lines.length;
           push(this.mermaid, lines);
           expect(this.mermaid.lines.length).to.equal(initialLines + lines);
         });
@@ -40,6 +37,7 @@ export function shouldBehaveLikeMermaid({
 
       pushes.forEach((indentation) => {
         it(`Add current indentation to line (${indentation})`, function () {
+          const initialLines = this.mermaid.lines.length;
           this.mermaid["_indentation"] = indentation;
           this.mermaid.push("Test");
           expect(this.mermaid.lines[initialLines]["_indentation"]).to.equal(
@@ -84,11 +82,25 @@ export function shouldBehaveLikeMermaid({
     describe("+text", function () {
       pushes.forEach((lines) => {
         it(`Print ${lines} lines added`, function () {
+          const initialLines = this.mermaid.lines.length;
+          this.mermaid.text; // Just to execute process
           push(this.mermaid, lines);
-          expect(this.mermaid.lines.length).to.equal(
+          expect(this.mermaid.text.split("\n").length).to.equal(
             initialLines + lines
           );
         });
+      });
+    });
+
+    describe("-_reset", function () {
+      it("should go back to initial state", function () {
+        push(this.mermaid, 4);
+        const expected = new Array(10)
+          .fill({})
+          .map((_, i) => new Line(`Text ${i}`, i));
+        this.mermaid.initialLines = expected;
+        this.mermaid["_reset"]();
+        expect(this.mermaid["_lines"]).to.equal(expected);
       });
     });
   });

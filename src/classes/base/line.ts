@@ -1,13 +1,18 @@
 import { ErrorType, FormatError } from "@classes/errors/format";
-import Indented from "./indented";
+import Indented, { DEFAULT_INDENTATION } from "./indented";
+
+export const DEFAULT_TEXT = "";
 
 export default class Line extends Indented {
   private readonly _regex = /^.*$/g;
   private readonly _spaces = "  ";
 
-  constructor(private _text: string = "", indentation = 0) {
+  private _initialText: string;
+
+  constructor(private _text = DEFAULT_TEXT, indentation = DEFAULT_INDENTATION) {
     super(indentation);
-    this._validate();
+    this._initialText = _text;
+    this.text = _text; // Explicit so `_validate` runs
   }
 
   private set text(text: string) {
@@ -20,7 +25,7 @@ export default class Line extends Indented {
   }
 
   concat(text: string) {
-    // Intentionally muting the variable
+    // Intentionally muting the variable so it's validated
     this.text = this._text.concat(text);
 
     return this;
@@ -29,5 +34,14 @@ export default class Line extends Indented {
   private _validate() {
     if (!this.text.match(this._regex))
       throw new FormatError("Line can't contain newline", ErrorType.BadLine);
+  }
+
+  protected _reset() {
+    super._reset();
+    this._text = this._initialText;
+  }
+
+  protected set initialText(text: string) {
+    this._initialText = text;
   }
 }

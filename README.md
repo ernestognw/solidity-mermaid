@@ -205,7 +205,7 @@ npm install
 
 ## Usage
 
-The project currently includes only the example in the ERC20Output.json only.
+The project currently includes only the example in the ERC721Output.json only.
 This can be replaced in `src/index.js`, which then can get executed with:
 
 ```sh

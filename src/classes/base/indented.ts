@@ -1,7 +1,13 @@
-export default class Indented {
-  constructor(private _indentation = 0) {}
+export const DEFAULT_INDENTATION = 0;
 
-  protected get indentation() {
+export default class Indented {
+  private _initialIndentation: number;
+
+  constructor(private _indentation = DEFAULT_INDENTATION) {
+    this._initialIndentation = 0;
+  }
+
+  public get indentation() {
     return this._indentation;
   }
 
@@ -11,5 +17,13 @@ export default class Indented {
 
   unindent() {
     if (this._indentation > 0) this._indentation--;
+  }
+
+  protected _reset() {
+    this._indentation = this._initialIndentation;
+  }
+
+  protected set initialIndentation(indentation: number) {
+    this._initialIndentation = indentation;
   }
 }

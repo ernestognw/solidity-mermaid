@@ -17,7 +17,7 @@ for (const [, { ast }] of Object.entries(
 
     writeFileSync(
       join(__dirname, "out", `${typeDef.name}.mermaid`),
-      classDiagram.text
+      classDiagram.processed
     );
   }
 }

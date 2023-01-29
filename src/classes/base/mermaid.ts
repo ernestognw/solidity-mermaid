@@ -1,10 +1,11 @@
-import Indented from "./indented";
+import Indented, { DEFAULT_INDENTATION } from "./indented";
 import Line from "./line";
 
 export default class Mermaid extends Indented {
-  protected _lines: Line[] = [];
+  private _lines: Line[] = [];
+  private _initialLines: Line[] = [];
 
-  constructor(_indentation = 0) {
+  constructor(_indentation = DEFAULT_INDENTATION) {
     super(_indentation);
   }
 
@@ -34,5 +35,14 @@ export default class Mermaid extends Indented {
 
   unindent() {
     super.unindent();
+  }
+
+  protected _reset() {
+    super._reset();
+    this._lines = this._initialLines;
+  }
+
+  protected set initialLines(lines: Line[]) {
+    this._initialLines = lines;
   }
 }
