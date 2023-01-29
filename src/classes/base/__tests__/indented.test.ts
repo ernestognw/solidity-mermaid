@@ -5,7 +5,7 @@ function build(indentation: number) {
   return new Indented(indentation);
 }
 
-describe("Indented", function () {
+describe(Indented.name, function () {
   shouldBehaveLikeIndented({
     initialIndentation: 0,
     build,

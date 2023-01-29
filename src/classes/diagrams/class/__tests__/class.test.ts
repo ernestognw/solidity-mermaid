@@ -12,7 +12,7 @@ function buildClass(indentation: number) {
   );
 }
 
-describe("Class", function () {
+describe(Class.name, function () {
   shouldBehaveLikeMermaid({
     initialIndentation: 1,
     initialLines: 1,

@@ -5,7 +5,7 @@ function buildMermaid(indentation: number) {
   return new Mermaid(indentation);
 }
 
-describe(`is ${Mermaid.name}`, function () {
+describe(Mermaid.name, function () {
   shouldBehaveLikeMermaid({
     initialIndentation: 0,
     initialLines: 0,

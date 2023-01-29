@@ -6,7 +6,7 @@ function buildLine(indentation: number) {
   return new Line("", indentation);
 }
 
-describe("Line", function () {
+describe(Line.name, function () {
   let line: Line;
 
   beforeEach(function () {
