@@ -1,7 +1,6 @@
 import { TypedError } from "./typed";
 
 export enum ErrorType {
-  BadIdentation = "BadIdentation",
   BadLine = "BadLine",
 }
 

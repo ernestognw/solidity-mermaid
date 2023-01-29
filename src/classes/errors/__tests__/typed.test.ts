@@ -6,7 +6,7 @@ enum TestTypes {
 }
 
 describe("TypedError", () => {
-  describe("constructor", () => {
+  describe("#constructor", () => {
     it("sets message", () => {
       const message = "Hello world";
       expect(new TypedError(message, "").message).to.equal(message);
@@ -17,7 +17,7 @@ describe("TypedError", () => {
     });
   });
 
-  describe("print", () => {
+  describe("+print", () => {
     it("includes name", () => {
       const typedError = new TypedError("", "");
       expect(typedError.print()).to.include(typedError.name);

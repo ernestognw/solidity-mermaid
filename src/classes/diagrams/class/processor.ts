@@ -6,7 +6,7 @@ import {
   Visibility,
 } from "solidity-ast";
 import { ASTProcessor, ProcessOptions } from "@classes/diagrams/types";
-import { Class } from ".";
+import Class from ".";
 import { ASTDereferencer, isNodeType } from "solidity-ast/utils";
 import { Node } from "solidity-ast/node";
 import { ASTError, ErrorType } from "@classes/errors/ast";

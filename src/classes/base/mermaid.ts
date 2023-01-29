@@ -4,6 +4,10 @@ import Line from "./line";
 export default class Mermaid extends Indented {
   protected _lines: Line[] = [];
 
+  constructor(_indentation = 0) {
+    super(_indentation);
+  }
+
   get lines() {
     return this._lines;
   }
@@ -22,5 +26,13 @@ export default class Mermaid extends Indented {
 
   unindentAll() {
     this.lines.forEach((line) => line.unindent());
+  }
+
+  indent() {
+    super.indent();
+  }
+
+  unindent() {
+    super.unindent();
   }
 }

@@ -1,4 +1,4 @@
-import { Class } from "@classes/diagrams/class";
+import Class from "@classes/diagrams/class";
 import { SolcOutput } from "solidity-ast/solc";
 import ERC20Ouput from "./ERC20Output.json";
 

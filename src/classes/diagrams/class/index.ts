@@ -4,12 +4,17 @@ import { SolcOutput } from "solidity-ast/solc";
 import { astDereferencer } from "solidity-ast/utils";
 import Processor from "./processor";
 
-export class Class extends Mermaid {
+export default class Class extends Mermaid {
   private readonly _node: Node;
   private _processor: Processor;
 
-  constructor(_solcOutput: SolcOutput, nodeType: NodeType, id: number) {
-    super();
+  constructor(
+    _solcOutput: SolcOutput,
+    nodeType: NodeType,
+    id: number,
+    initialIndentation?: number
+  ) {
+    super(initialIndentation);
 
     const dereference = astDereferencer(_solcOutput);
     this._node = dereference(nodeType, id);
@@ -25,6 +30,14 @@ export class Class extends Mermaid {
 
   get processor() {
     return this._processor;
+  }
+
+  unindentAll() {
+    super.unindentAll();
+  }
+
+  indentAll() {
+    super.indentAll();
   }
 
   push(text: string) {
