@@ -12,7 +12,7 @@
   </a>
 </p>
 
-> A Solidity tool to generate mermaid.js Class Diagrams
+> A Solidity AST parser that allows to convert smart contracts into Github's Mermaid.js language for diagramming.
 
 [Solidity](https://docs.soliditylang.org/en/latest/index.html) is an object-oriented, high-level language for implementing smart contracts on top of the Ethereum Virtual Machine, while [Mermaid](https://mermaid.js.org/) is a Javascript library for diagramming that includes support for [Class Diagrams](https://mermaid.js.org/syntax/classDiagram.html).
 

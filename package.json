@@ -1,7 +1,7 @@
 {
   "name": "solidity-mermaid",
   "version": "0.1.0",
-  "description": "A Solidity tool to generate mermaid.js Class Diagrams",
+  "description": "A Solidity AST parser that allows to convert smart contracts into Github's Mermaid.js language for diagramming.",
   "main": "src/index.js",
   "author": "Ernesto García <ernestognw@gmail.com>",
   "license": "MIT",
