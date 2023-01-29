@@ -1,9 +1,9 @@
 import Class from "@classes/diagrams/class";
 import { SolcOutput } from "solidity-ast/solc";
-import ERC20Ouput from "./ERC20Output.json";
+import ERC721Output from "./ERC721Output.json";
 
 const classDiagram = new Class(
-  ERC20Ouput as SolcOutput,
+  ERC721Output as SolcOutput,
   "ContractDefinition",
   2787
 );
