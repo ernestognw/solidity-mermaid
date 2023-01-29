@@ -44,9 +44,9 @@ classDiagram
     +constructor()
     +awardItem(address player, string memory tokenURI): (uint256)
   }
-  
+
   GameItem --|> ERC721URIStorage
-  
+
   %% 248:1623:3
   class ERC721URIStorage {
     <<Contract>>
@@ -54,9 +54,9 @@ classDiagram
     ~_setTokenURI(uint256 tokenId, string memory _tokenURI)
     ~_burn(uint256 tokenId)
   }
-  
+
   ERC721URIStorage --|> ERC721
-  
+
   %% 628:16327:0
   class ERC721 {
     <<Contract>>
@@ -91,34 +91,34 @@ classDiagram
     ~_beforeTokenTransfer(address from, address to, uint256, uint256 batchSize)
     ~_afterTokenTransfer(address from, address to, uint256 firstTokenId, uint256 batchSize)
   }
-  
+
   ERC721 --|> Context
-  
+
   %% 608:235:6
   class Context {
     <<Contract>>
     ~_msgSender(): (address)
     ~_msgData(): (bytes calldata)
   }
-  
+
   ERC721 --|> ERC165
-  
+
   %% 726:260:9
   class ERC165 {
     <<Contract>>
     +supportsInterface(bytes4 interfaceId): (bool)
   }
-  
+
   ERC165 --|> IERC165
-  
+
   %% 405:447:10
   class IERC165 {
     <<Interface>>
     #supportsInterface(bytes4 interfaceId): (bool)$
   }
-  
+
   ERC721 --|> IERC721
-  
+
   %% 250:4725:1
   class IERC721 {
     <<Interface>>
@@ -132,17 +132,17 @@ classDiagram
     #getApproved(uint256 tokenId): (address operator)$
     #isApprovedForAll(address owner, address operator): (bool)$
   }
-  
+
   IERC721 --|> IERC165
-  
+
   %% 405:447:10
   class IERC165 {
     <<Interface>>
     #supportsInterface(bytes4 interfaceId): (bool)$
   }
-  
+
   ERC721 --|> IERC721Metadata
-  
+
   %% 297:463:4
   class IERC721Metadata {
     <<Interface>>
@@ -150,9 +150,9 @@ classDiagram
     #symbol(): (string memory)$
     #tokenURI(uint256 tokenId): (string memory)$
   }
-  
+
   IERC721Metadata --|> IERC721
-  
+
   %% 250:4725:1
   class IERC721 {
     <<Interface>>
@@ -166,9 +166,9 @@ classDiagram
     #getApproved(uint256 tokenId): (address operator)$
     #isApprovedForAll(address owner, address operator): (bool)$
   }
-  
+
   IERC721 --|> IERC165
-  
+
   %% 405:447:10
   class IERC165 {
     <<Interface>>
@@ -180,7 +180,7 @@ classDiagram
 
 ## Getting started
 
->  **Note**
+> **Note**
 > This repository is still in development, so there's no currently an installable, but keep an eye on [this issue](https://github.com/ernestognw/solidity-mermaid/issues/20)
 
 Now to begin, clone the repo and then follow the next steps:
@@ -210,7 +210,7 @@ npm run test
 
 👤 **Ernesto García <ernestognw@gmail.com>**
 
-* Github: [@ernestognw](https://github.com/ernestognw)
+- Github: [@ernestognw](https://github.com/ernestognw)
 
 ## 🤝 Contributing
 
@@ -225,5 +225,6 @@ Give a ⭐️ if this project helped you!
 Copyright © 2023 [Ernesto García <ernestognw@gmail.com>](https://github.com/ernestognw).<br />
 This project is [MIT](https://github.com/ernestognw/solidity-mermaid/blob/master/LICENSE) licensed.
 
-***
+---
+
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_

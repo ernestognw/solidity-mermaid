@@ -118,10 +118,7 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/ernest
 
 ### Your First Code Contribution
 
-<!-- TODO
-include Setup of env, IDE and typical getting started instructions?
-
--->
+To set up the project, follow the [getting started](#getting-started) instructions.
 
 ### Improving The Documentation
 
