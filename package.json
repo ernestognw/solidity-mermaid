@@ -6,6 +6,14 @@
   "author": "Ernesto García <ernestognw@gmail.com>",
   "license": "MIT",
   "private": false,
+  "homepage": "https://github.com/ernestognw/solidity-mermaid#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ernestognw/solidity-mermaid.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ernestognw/solidity-mermaid/issues"
+  },
   "scripts": {
     "test": "mocha",
     "coverage": "nyc npm run test"

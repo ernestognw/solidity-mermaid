@@ -4,10 +4,10 @@
     "noEmit": true,
     "allowJs": true,
     "noImplicitAny": false,
-    "rootDir": "./src",
-    "baseUrl": "./src",
+    "rootDir": "./.",
+    "baseUrl": "./.",
     "paths": {
-      "@*": ["./*"]
+      "@*": ["./src/*"]
     }
   },
   "ts-node": {
