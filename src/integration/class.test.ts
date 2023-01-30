@@ -61,8 +61,6 @@ describe("Class Diagram", function () {
       parser = getParserFrom(data);
     });
 
-    console.log(getContracts().length);
-
     for (const { name, content } of getContracts()) {
       const output = getOutput(name, { content });
 

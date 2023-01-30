@@ -85,7 +85,6 @@ describe(Class.name, function () {
       const text = this.classDiagram.processed;
       this.classDiagram.print();
       expect(stub.calledOnce).to.be.true;
-      console.log(stub.firstCall.args[0], text);
       expect(stub.firstCall.args[0]).to.equal(text);
     });
   });
