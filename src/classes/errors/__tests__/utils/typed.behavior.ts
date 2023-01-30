@@ -1,5 +1,6 @@
 import { TypedError } from "@classes/errors/typed";
 import { expect } from "chai";
+import sinon, { SinonStub } from "sinon";
 
 interface BehaveLikeTypedErrorParams {
   build<T extends ConstructorParameters<typeof TypedError>>(
@@ -26,20 +27,36 @@ export function shouldBehaveLikeTypedError({
   });
 
   describe("+print", () => {
+    let stub: SinonStub;
+
+    beforeEach(function () {
+      stub = sinon.stub(console, "error");
+    });
+
+    afterEach(function () {
+      stub.restore();
+    });
+
     it("includes name", () => {
       const typedError = build("", "");
-      expect(typedError.print()).to.include(typedError.name);
+      typedError.print();
+      expect(stub.calledOnce).to.be.true;
+      expect(stub.firstCall.args[0]).to.include(typedError.name);
     });
 
     it("includes type", () => {
       const typedError = build("", "");
-      expect(typedError.print()).to.include(typedError.type);
+      typedError.print();
+      expect(stub.calledOnce).to.be.true;
+      expect(stub.firstCall.args[0]).to.include(typedError.type);
     });
 
     it("includes message", () => {
       const message = "Testing error";
       const typedError = build(message, "");
-      expect(typedError.print()).to.include(message);
+      typedError.print();
+      expect(stub.calledOnce).to.be.true;
+      expect(stub.firstCall.args[0]).to.include(message);
     });
   });
 }
