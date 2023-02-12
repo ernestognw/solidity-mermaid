@@ -93,16 +93,12 @@ Once it's filed:
 
 This section guides you through submitting an enhancement suggestion for solidity-mermaid, **including completely new features and minor improvements to existing functionality**. Following these guidelines will help maintainers and the community to understand your suggestion and find related suggestions.
 
-<!-- omit in toc -->
-
 #### Before Submitting an Enhancement
 
 - Make sure that you are using the latest version.
 - Read the [documentation](https://github.com/ernestognw/solidity-mermaid#README) carefully and find out if the functionality is already covered, maybe by an individual configuration.
 - Perform a [search](https://github.com/ernestognw/solidity-mermaid/issues) to see if the enhancement has already been suggested. If it has, add a comment to the existing issue instead of opening a new one.
 - Find out whether your idea fits with the scope and aims of the project. It's up to you to make a strong case to convince the project's developers of the merits of this feature. Keep in mind that we want features that will be useful to the majority of our users and not just a small subset. If you're just targeting a minority of users, consider writing an add-on/plugin library.
-
-<!-- omit in toc -->
 
 #### How Do I Submit a Good Enhancement Suggestion?
 
@@ -118,7 +114,19 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/ernest
 
 ### Your First Code Contribution
 
-To set up the project, follow the [getting started](#getting-started) instructions.
+To begin, clone the repo and then follow the next steps:
+
+```sh
+npm install
+```
+
+## Run tests
+
+Just run:
+
+```sh
+npm run test
+```
 
 ### Improving The Documentation
 

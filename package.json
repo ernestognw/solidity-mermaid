@@ -7,7 +7,7 @@
   "author": "Ernesto García <ernestognw@gmail.com>",
   "license": "MIT",
   "private": false,
-  "homepage": "https://github.com/ernestognw/solidity-mermaid#readme",
+  "homepage": "https://www.npmjs.com/package/solidity-mermaid",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ernestognw/solidity-mermaid.git"

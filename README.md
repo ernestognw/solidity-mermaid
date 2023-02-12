@@ -193,55 +193,87 @@ classDiagram
   }
 ```
 
-### 🏠 [Homepage](https://github.com/ernestognw/solidity-mermaid#readme)
-
 ## Getting started
 
-> **Note**
-> This repository is still in development, so there's no currently an installable, but keep an eye on [this issue](https://github.com/ernestognw/solidity-mermaid/issues/20)
-
-Now to begin, clone the repo and then follow the next steps:
-
-```sh
-npm install
+```
+npm install solidity-mermaid
 ```
 
-## Usage
+### Getting a Solc Output
 
-The project currently includes only the example in the ERC721Output.json only.
-This can be replaced in `src/index.js`, which then can get executed with:
+In order to get a Solc output, you can use a compilation artifact from your common development enviroment (such as [Hardhat](https://github.com/NomicFoundation/hardhat) or [Foundry](https://github.com/foundry-rs/foundry/))
 
-```sh
-npx ts-node src/index.js
+If not, you can always get the output from scratch using [solc-js](https://github.com/ethereum/solc-js):
+
+```js
+import solc from "solc";
+
+const input = {
+  language: "Solidity",
+  sources: {
+    "path/to/your/file.sol": {
+      content: `
+        // SPDX-License-Identifier: MIT
+
+        ...
+
+        contract Example is ... {
+          ...
+        }
+      `,
+    },
+  },
+  settings: {
+    outputSelection: {
+      "*": {
+        "*": ["*"],
+        "": ["ast"],
+      },
+    },
+  },
+};
+
+const output = JSON.parse(solc.compile(JSON.stringify(input)));
 ```
 
-## Run tests
+### Solidity AST to Class Diagram
 
-Just run:
+To get a class diagram from your output, you'll need to pass the output, and an AST node with its type and id:
 
-```sh
-npm run test
+```js
+const classDiagram = new Class(output, "ContractDefinition", typeDef.id);
+
+// First run you'll need to use `processed` so the AST gets converted into text
+console.log(classDiagram.processed);
+
+// Afterwards, if no changes were made to the AST, you can just print its text
+console.log(classDiagram.text);
 ```
 
-## Author
+You can also use it with `solidity-ast/utils`
 
-👤 **Ernesto García <ernestognw@gmail.com>**
+```js
+import { Class } from "solidity-mermaid";
+import { findAll } from "solidity-ast/utils";
 
-- Github: [@ernestognw](https://github.com/ernestognw)
+for (const [, { ast }] of Object.entries(output.sources)) {
+  for (const typeDef of findAll(["ContractDefinition"], ast)) {
+    const classDiagram = new Class(output, "ContractDefinition", typeDef.id);
+  
+    // ...
+  }
+}
+```
+
+## Solidity Versioning
+
+The Solidity AST should've been produce with a version that's supported in OpenZeppelin's [solidity-ast](https://github.com/OpenZeppelin/solidity-ast) package.
 
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/ernestognw/solidity-mermaid/issues). You can also take a look at the [contributing guide](https://github.com/ernestognw/solidity-mermaid/blob/master/CONTRIBUTING.md).
 
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
 ## 📝 License
 
 Copyright © 2023 [Ernesto García <ernestognw@gmail.com>](https://github.com/ernestognw).<br />
 This project is [MIT](https://github.com/ernestognw/solidity-mermaid/blob/master/LICENSE) licensed.
-
----
-
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
