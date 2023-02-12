@@ -5,7 +5,7 @@ import {
   VariableDeclaration,
   Visibility,
 } from "solidity-ast";
-import { ASTProcessor, ProcessOptions } from "@classes/diagrams/types";
+import { ASTProcessor, ProcessOptions } from "@types";
 import Class from ".";
 import { ASTDereferencer, isNodeType } from "solidity-ast/utils";
 import { Node } from "solidity-ast/node";

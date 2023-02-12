@@ -4,7 +4,7 @@ import { join, relative } from "path";
 import { readFileSync } from "fs";
 import { SolcOutput } from "solidity-ast/solc";
 import { findAll } from "solidity-ast/utils";
-import Class from "@classes/diagrams/class";
+import { Class } from "@/index";
 import axios from "axios";
 import { Parser } from "jison";
 import { expect } from "chai";

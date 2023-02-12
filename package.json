@@ -16,8 +16,17 @@
   },
   "scripts": {
     "test": "mocha",
-    "coverage": "c8 npm run test --"
+    "coverage": "c8 npm run test --",
+    "prepublishOnly": "npm run clean",
+    "prepare": "tsc && tsc-alias",
+    "clean": "rm -rf dist"
   },
+  "files": [
+    "/src",
+    "/dist",
+    "!**/*.tsbuildinfo",
+    "!**/*.test.*"
+  ],
   "devDependencies": {
     "@openzeppelin/contracts": "^4.8.1",
     "@types/chai": "^4.3.4",
@@ -37,6 +46,7 @@
     "sinon": "^15.0.1",
     "solc": "^0.8.17",
     "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.2",
     "tsconfig-paths": "^4.1.2",
     "typescript": "^4.9.4"
   },

@@ -1,15 +1,18 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "noEmit": true,
     "allowJs": true,
     "noImplicitAny": false,
-    "rootDir": "./.",
-    "baseUrl": "./.",
+    "rootDir": "src",
+    "baseUrl": "src",
     "paths": {
-      "@*": ["./src/*"]
-    }
+      "@*": ["./*"]
+    },
+    "outDir": "./dist",
   },
+  "include": [
+    "src/**/*"
+  ],
   "ts-node": {
     "require": ["tsconfig-paths/register"]
   }

@@ -6,7 +6,8 @@
     "downlevelIteration": true,
     "strict": true,
     "module": "commonjs",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "outDir": "dist"
   },
   "ts-node": {
     "transpileOnly": true

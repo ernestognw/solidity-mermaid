@@ -1,6 +1,6 @@
 import Class from "../";
 import { shouldBehaveLikeMermaid } from "@classes/base/__tests__/utils/mermaid.behavior";
-import ERC721Output from "@/ERC721Output.json";
+import ERC721Output from "@fixtures/ERC721.output.json";
 import { SolcOutput } from "solidity-ast/solc";
 import { NodeType } from "solidity-ast/node";
 import { expect } from "chai";
