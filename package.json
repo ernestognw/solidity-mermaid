@@ -30,6 +30,12 @@
     "!**/*.tsbuildinfo",
     "!**/*.test.*"
   ],
+  "keywords": [
+    "solidity",
+    "mermaid",
+    "diagram",
+    "ethereum"
+  ],
   "devDependencies": {
     "@openzeppelin/contracts": "^4.8.1",
     "@types/chai": "^4.3.4",
