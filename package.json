@@ -1,6 +1,6 @@
 {
   "name": "solidity-mermaid",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A Solidity AST parser that allows to convert smart contracts into Github's Mermaid.js language for diagramming.",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
