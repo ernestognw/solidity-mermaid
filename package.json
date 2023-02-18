@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "A Solidity AST parser that allows to convert smart contracts into Github's Mermaid.js language for diagramming.",
   "types": "dist/index.d.ts",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "author": "Ernesto García <ernestognw@gmail.com>",
   "license": "MIT",
   "private": false,
